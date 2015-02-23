@@ -82,6 +82,7 @@ public extension NSDate {
     
 }
 
+
 func + (left: NSDate, right: NSDateComponents) -> NSDate {
     let calendar = NSCalendar.currentCalendar()
     var components = calendar.components(.YearCalendarUnit | .MonthCalendarUnit | .DayCalendarUnit | .HourCalendarUnit | .MinuteCalendarUnit | .SecondCalendarUnit, fromDate: left)
@@ -94,6 +95,7 @@ func + (left: NSDate, right: NSDateComponents) -> NSDate {
     return calendar.dateFromComponents(components)!
 }
 
+
 func - (left: NSDate, right: NSDateComponents) -> NSDate {
     let calendar = NSCalendar.currentCalendar()
     var components = calendar.components(.YearCalendarUnit | .MonthCalendarUnit | .DayCalendarUnit | .HourCalendarUnit | .MinuteCalendarUnit | .SecondCalendarUnit, fromDate: left)
@@ -104,5 +106,27 @@ func - (left: NSDate, right: NSDateComponents) -> NSDate {
     components.minute -= right.minute
     components.second -= right.second
     return calendar.dateFromComponents(components)!
+}
+
+
+func > (left: NSDate, right: NSDate) -> Bool {
+    let timeInterval = left.timeIntervalSinceDate(right)
+    return timeInterval > 0
+}
+
+
+func < (left: NSDate, right: NSDate) -> Bool {
+    let timeInterval = left.timeIntervalSinceDate(right)
+    return timeInterval < 0
+}
+
+
+func >= (left: NSDate, right: NSDate) -> Bool {
+    return (left > right) || (left == right)
+}
+
+
+func <= (left: NSDate, right: NSDate) -> Bool {
+    return (left < right) || (left == right)
 }
 
